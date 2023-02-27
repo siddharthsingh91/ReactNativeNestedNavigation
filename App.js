@@ -123,7 +123,9 @@ function Tab(){
     >
       <BottomTab.Screen name='Dashboard' component={Drawer} options={{headerShown:false}} />
       <BottomTab.Screen name='Setting' component={Setting} />
-      <BottomTab.Screen name='Profile' component={Profile} />
+      <BottomTab.Screen name='Profile' component={Profile} options={{ tabBarButton: (props) => (
+        <CustomTabBarButton{ ...props} />
+      )}}/>
       <BottomTab.Screen name='Login' component={Login} />
       <BottomTab.Screen name='Chat' component={Chat} />
     </BottomTab.Navigator>
@@ -160,3 +162,24 @@ const styles = StyleSheet.create({
    elevation:5
   }
 });
+
+const CustomTabBarButton = ({children, onPress }) =>(
+  <TouchableOpacity
+  style={{
+    top:-20,
+    justifyContent : 'center',
+    alignItems : 'center',
+    ...styles.shadow
+  }}
+   onPress={onPress}
+  >
+    <View style={{
+      width:60,
+      height:60,
+      borderRadius:35,
+      backgroundColor:'#000'
+    }}>
+      {children}
+    </View>
+  </TouchableOpacity>
+);
