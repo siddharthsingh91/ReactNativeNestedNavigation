@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -58,18 +60,72 @@ function Chat(){
 }
 function Drawer(){
   return (
-    <DrawerNav.Navigator>
+    <DrawerNav.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#f4511e', //Set Header color
+      },
+      headerTintColor: '#fff', //Set Header text color
+    }}>
       <DrawerNav.Screen name='Dashboard' component={Dashboard} />
       <DrawerNav.Screen name='Profile' component={Profile} />
       <DrawerNav.Screen name='Chat' component={Chat} />
+      <DrawerNav.Screen name='Setting' component={Setting} />
     </DrawerNav.Navigator>
   )
 }
 function Tab(){
   return (
-    <BottomTab.Navigator>
+    <BottomTab.Navigator
+     screenOptions={({ route }) => ({
+      tabBarShowLabel: false,
+      tabBarStyle: { 
+      position: 'absolute', 
+      bottom: 25,
+      color: '#fff',
+      left: 20,
+      borderRadius: 15,
+      height : 60,
+      elevation: 0,
+      backgroundColor: 'red',
+      right: 20,
+      ...styles.shadow
+    },
+
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+        let rn = route.name;
+
+        if (rn === 'Dashboard') {
+          iconName = focused ? 'home' : 'home-outline';
+          color = focused ? '#fff' : '#ccc';
+
+        } else if (rn === 'Setting') {
+          iconName = focused ? 'list' : 'list-outline';
+          color = focused ? '#fff' : '#ccc';
+
+        } else if (rn === 'Chat') {
+          iconName = focused ? 'settings' : 'settings-outline';
+          color = focused ? '#fff' : '#ccc';
+        }
+        else if (rn === 'Profile') {
+          iconName = focused ? 'person' : 'person-outline';
+          color = focused ? '#fff' : '#ccc';
+        }
+        else if (rn === 'Login') {
+          iconName = focused ? 'log-in' : 'log-in-outline';
+          color = focused ? '#fff' : '#ccc';
+        }
+        
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+    })}
+    >
       <BottomTab.Screen name='Dashboard' component={Drawer} options={{headerShown:false}} />
       <BottomTab.Screen name='Setting' component={Setting} />
+      <BottomTab.Screen name='Profile' component={Profile} />
+      <BottomTab.Screen name='Login' component={Login} />
+      <BottomTab.Screen name='Chat' component={Chat} />
     </BottomTab.Navigator>
   )
 }
@@ -78,7 +134,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown:false }}>
-        <Stack.Screen name='Tab' component={Tab} />
+        <Stack.Screen name='Tab' component={Tab}/>
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Signup' component={Signup} />
       </Stack.Navigator>
@@ -93,4 +149,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  shadow:{
+   shadowColor : '#000',
+   shadowOffset : {
+    width :0,
+    height: 10
+   }, 
+   shadowOpacity:0.25,
+   shadowRadius:3.5,
+   elevation:5
+  }
 });
