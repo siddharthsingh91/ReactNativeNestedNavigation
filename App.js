@@ -1,76 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity, DrawerActions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import BottomNave from './Navigation/BottomNave';
 
+import Dashboard from './Screen/Dashboard'; 
+import Profile from './Screen/Profile';
+import Login from './Screen/Login';
+import Chat from './Screen/Chat';  
+import Setting from './Screen/Setting';
+import Signup from './Screen/Signup';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const DrawerNav = createDrawerNavigator();
 
-function Login({navigation}){
+
+
+export default function Drawer(){
   return (
-    <View style={styles.container}>
-      <Text>Login Page</Text>
-      <Button onPress={() => navigation.navigate('Signup')}
-      title='Need an account?'  />
-    </View>
-  )
-}
-function Signup({navigation}){
-  return (
-    <View style={styles.container}>
-      <Text>Login Page</Text>
-      <Button onPress={() => navigation.navigate('Tab')}
-      title='Need To Login?'  />
-    </View>
-  )
-}
-function Dashboard({navigation}){
-  return (
-    <View style={styles.container}>
-      <Text>Dashboard</Text>
-      <Button title='Logout' onPress={() => navigation.navigate('Login')} />
-    </View>
-  )
-}
-function Setting(){
-  return (
-    <View style={styles.container}>
-      <Text>Settings Page</Text>
-    </View>
-  )
-}
-function Profile(){
-  return (
-    <View style={styles.container}>
-      <Text>Profile Page</Text>
-    </View>
-  )
-}
-function Chat(){
-  return (
-    <View style={styles.container}>
-      <Text>Chat Room</Text>
-    </View>
-  )
-}
-function Drawer(){
-  return (
-    <DrawerNav.Navigator screenOptions={{
+    <NavigationContainer>
+    <DrawerNav.Navigator initialRouteName="Tab" 
+    screenOptions={{
       headerStyle: {
         backgroundColor: '#f4511e', //Set Header color
       },
       headerTintColor: '#fff', //Set Header text color
     }}>
-      <DrawerNav.Screen name='Dashboard' component={Dashboard} />
+      
+      <DrawerNav.Screen name='Dash' component={Tab} />
       <DrawerNav.Screen name='Profile' component={Profile} />
       <DrawerNav.Screen name='Chat' component={Chat} />
       <DrawerNav.Screen name='Setting' component={Setting} />
-    </DrawerNav.Navigator>
+    </DrawerNav.Navigator></NavigationContainer>
   )
 }
 function Tab(){
@@ -121,7 +86,7 @@ function Tab(){
       },
     })}
     >
-      <BottomTab.Screen name='Dashboard' component={Drawer} options={{headerShown:false}} />
+      <BottomTab.Screen name='Dashboard' component={Dashboard} options={{headerShown:false}}  />
       <BottomTab.Screen name='Setting' component={Setting} />
       <BottomTab.Screen name='Profile' component={Profile} options={{ tabBarButton: (props) => (
         <CustomTabBarButton{ ...props} />
@@ -132,15 +97,14 @@ function Tab(){
   )
 }
 
-export default function App() {
+//export default 
+const MyStack = () => {
   return (
-    <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown:false }}>
         <Stack.Screen name='Tab' component={Tab}/>
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Signup' component={Signup} />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
