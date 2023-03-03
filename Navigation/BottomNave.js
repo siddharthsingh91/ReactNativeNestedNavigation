@@ -14,6 +14,7 @@ const PageTab = createBottomTabNavigator();
 function BottomNave(){
 return (
     <PageTab.Navigator
+    initialRouteName="Section"
      screenOptions={({ route }) => ({
       tabBarShowLabel: false,
       tabBarStyle: { 
@@ -109,8 +110,7 @@ const CustomTabBarButton = ({children, onPress }) =>(
   style={{
     top:-20,
     justifyContent : 'center',
-    alignItems : 'center',
-    ...styles.shadow
+    alignItems : 'center'
   }}
    onPress={onPress}
   >
