@@ -19,7 +19,7 @@ const Chat = () => {
         <Text style={styles.footerHeading}>
           React Navigation Drawer with Sectioned Menu
         </Text>
-        <Text style={styles.footerText}>www.aboutreact.com</Text>
+        <Text style={styles.footerText}>SAND IT SOLTUION</Text>
       </View>
     </SafeAreaView>
   );
