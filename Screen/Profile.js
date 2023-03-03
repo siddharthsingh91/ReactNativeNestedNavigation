@@ -3,7 +3,6 @@
 
 import * as React from 'react';
 import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
-import BottomNave from '../Navigation/BottomNave';
 
 const Profile = () => {
   return (
@@ -19,8 +18,7 @@ const Profile = () => {
         <Text style={styles.footerHeading}>
           React Navigation Drawer with Sectioned Menu
         </Text>
-        <Text style={styles.footerText}>www.aboutreact.com</Text>
-        <BottomNave/>
+        <Text style={styles.footerText}>SAND IT SOLUTION</Text>
       </View>
     </SafeAreaView>
   );
